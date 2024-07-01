@@ -4,20 +4,18 @@
     <meta charset="UTF-8" />
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
     <meta
-      http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'"
-    />
+  http-equiv="Content-Security-Policy"
+  content="default-src 'self'; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;"
+/>
     <meta
       http-equiv="X-Content-Security-Policy"
       content="default-src 'self'; script-src 'self'"
     />
-    <title>Hello from Electron renderer!</title>
+    <title>LCR Meter control</title>
   </head>
   <body>
-    Title: <input id="title"/>
-    <button id="btn" type="button">Set</button>
-    
+    <div id="root"></div>
+    <script src="bundle.js"></script>
   </body>
-  <script src="./renderer.js"></script>
 
 </html>

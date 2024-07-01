@@ -11,8 +11,10 @@ function handleSetTitle (event, title) {
 
 const createWindow = () => {
   const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    minWidth: 800,
+    width: 1000,
+    minHeight: 600,
+    height:900,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: false,
@@ -28,7 +30,7 @@ const createWindow = () => {
   // })
 
   //win.loadURL para cargar una pagina
-  win.loadFile('index.html')
+  win.loadFile(path.join(__dirname, 'dist', 'index.html'));
   // const contents = win.webContents
   // console.log(contents)
   win.webContents.openDevTools()
