@@ -1,5 +1,5 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
+import React, {useState} from 'react';
+
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
@@ -8,7 +8,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
-import { Box, Select,Divider,MenuItem,FormControl,InputLabel } from '@mui/material';
+import { Box, Select,Stack,Button,Divider,MenuItem,FormControl,InputLabel } from '@mui/material';
 
 function CustomTabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -34,12 +34,13 @@ return {
 }
 
 function BasicTabs() {
-    const [value, setValue] = React.useState(0);
-
+    const [value, setValue] = useState(0);
+    const [age, setAge] = useState('');
+    const [medicion, setMedicion] = useState(age);
+    
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-    const [age, setAge] = React.useState('');
 
     const handleAge = (event) => {
         setAge(event.target.value);
@@ -57,8 +58,8 @@ function BasicTabs() {
             <CustomTabPanel value={value} index={0}>
                 <>
                     MEAS Puntual
-                    <h2>Valor real:<strong>{age}</strong></h2>
-                    <h2>Valor imaginario:<strong>{age}</strong></h2>
+                    <h2>Valor real:<strong>{medicion}</strong></h2>
+                    <h2>Valor imaginario:<strong>{medicion}</strong></h2>
                 </>
             </CustomTabPanel>
             <CustomTabPanel value={value} index={1}>
@@ -70,20 +71,30 @@ function BasicTabs() {
             <h1 style={{ textAlign: 'center' ,  border: '2px solid black' }}>MEAS Config</h1>
             <Divider sx={{ pt:6}}/>
             <Box sx={{ p: 3}}>
-                <FormControl fullWidth >
-                    <InputLabel id="demo-simple-select-label">Función</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={age}
-                        label="Age"
-                        onChange={handleAge}
-                        sx={{ width: '100px'}}
-                    >
-                        <MenuItem value={10}>Ten</MenuItem>
-                        <MenuItem value={20}>Twenty</MenuItem>
-                        <MenuItem value={30}>Thirty</MenuItem>
-                    </Select>
+                <FormControl fullWidth>
+                    <Stack spacing={2}>
+                        <InputLabel id="demo-simple-select-label">Función</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={age}
+                            label="Age"
+                            onChange={handleAge}
+                            sx={{ width: '100px'}}
+                        >
+                            <MenuItem value={10}>Diez</MenuItem>
+                            <MenuItem value={20}>Veinte</MenuItem>
+                            <MenuItem value={30}>Treinta</MenuItem>
+                        </Select>
+                        <Button
+                            variant='contained'
+                            onClick={() => {
+                                setMedicion(age);
+                            }}
+                        >
+                            Trigger
+                        </Button>
+                    </Stack>
                 </FormControl>
             </Box>
         </Grid2>
