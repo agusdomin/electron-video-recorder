@@ -26,6 +26,17 @@ function CustomTabPanel(props) {
     );
 }
 
+function trigger(){
+    console.log('Apreto el boton')
+    window.electronAPI.trigger()  
+}
+// const triggerButton = document.getElementById('btn')
+// triggerButton.addEventListener('click', () => {
+// //  const title = titleInput.value
+//   console.log('Apreto el boton')
+//   window.electronAPI.trigger()
+// })
+
 function a11yProps(index) {
 return {
     id: `simple-tab-${index}`,
@@ -87,9 +98,10 @@ function BasicTabs() {
                             <MenuItem value={30}>Treinta</MenuItem>
                         </Select>
                         <Button
+                            id="trigger-button"
                             variant='contained'
-                            onClick={() => {
-                                setMedicion(age);
+                             onClick={() => {
+                                 trigger();
                             }}
                         >
                             Trigger

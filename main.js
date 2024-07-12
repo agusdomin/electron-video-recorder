@@ -2,6 +2,10 @@
 const { app, BrowserWindow , ipcMain} = require('electron')
 const path = require('path');
 
+const zmq = require('zeromq');
+const ndarray = require('ndarray'); // Assuming you installed ndarray
+
+
 function handleSetTitle (event, title) {
   // Para tomar la instancia de BrowserWindow que esta attached al mensaje del 
   const webContents = event.sender
@@ -37,9 +41,32 @@ const createWindow = () => {
 
 }
 
+async function medirImpedancia (event) {
+  try {
+  
+  const socket = new zmq.Request();
+  socket.connect('tcp://localhost:5555');
+
+  const message = 'Medir impedancia';
+  await socket.send(message);
+
+  console.log('Esperando medicion...');
+  const buffer = await socket.receive()
+  console.log('buffer',buffer.toString("hex"))
+  
+  // await socket.on('message', (reply) => {
+  //   console.log('Medicion recibida:', reply.toString());
+  // });
+  } catch (error) {
+    console.error('Error:', error);
+  } 
+}
+
 app.whenReady().then(() => {
   
   createWindow()
+
+  ipcMain.on('trigger',medirImpedancia)
   ipcMain.on('set-title',handleSetTitle)
 
   app.on("activate", () => {

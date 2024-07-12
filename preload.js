@@ -18,5 +18,6 @@ contextBridge.exposeInMainWorld('versions', {
 })
 
 contextBridge.exposeInMainWorld('electronAPI',{
-    setTitle: (title) => ipcRenderer.send('set-title', title)
+    setTitle: (title) => ipcRenderer.send('set-title', title),
+    trigger: () => ipcRenderer.send('trigger')
 })

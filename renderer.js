@@ -11,9 +11,11 @@
 //     func()
 // })
 
-const setButton = document.getElementById('btn')
-const titleInput = document.getElementById('title')
-setButton.addEventListener('click', () => {
-  const title = titleInput.value
-  window.electronAPI.setTitle(title)
+//const titleInput = document.getElementById('title')
+const triggerButton = document.getElementById('btn')
+
+triggerButton.addEventListener('click', () => {
+//  const title = titleInput.value
+  console.log('Apreto el boton')
+  window.electronAPI.trigger()
 })
